@@ -6,7 +6,55 @@
     </head>
     <body>
         <script>
-            
+            let playerSelection;
+            function computerPlay (throws){
+                let computer_throw = Math.floor(Math.random() * 3);
+                return throws[computer_throw];
+            }
+
+            function playRound (playerSelection, computerSelection){
+                let result;
+                if (playerSelection == computerSelection){
+                    result = 'Draw! ' + playerSelection + ' does nothing to ' + computerSelection;
+                } else if ((playerSelection == "Rock" && computerSelection == "Paper") || (playerSelection == "Paper" && computerSelection == "Scissors") ||
+                    (playerSelection == "Scissors" && computerSelection == "Rock")){
+                        result = 'You Lose! ' + computerSelection + ' beats ' + playerSelection;
+                } else if ((playerSelection == "Rock" && computerSelection == "Scissors") || (playerSelection == "Paper" && computerSelection == "Rock") ||
+                        (playerSelection == "Scissors" && computerSelection == "Paper")){
+                            result = 'You Win! ' + playerSelection + ' beats ' + computerSelection;
+                }
+                return result;
+            }
+
+            function capitalize(string){
+                let capString = string.toLowerCase();
+                let upperChar = string.slice(0, 1);
+                let newString = string.slice(1)
+                upperChar = upperChar.toUpperCase();
+                capString = upperChar + newString;
+                return capString;
+            }
+
+            function getPlayerSelection() {
+                let playerChoice = window.prompt('Enter your throw of either Rock, Paper, or Scissors');
+                console.log(playerChoice);
+                playerSelection = capitalize(playerChoice);
+                return playerSelection;
+            }
+
+            function game(){
+                let throws = ["Rock", "Paper", "Scissors"]
+                playerThrow = getPlayerSelection();
+                let computerThrow = computerPlay(throws);
+                let result = playRound(playerThrow, computerThrow);
+                console.log(result);
+                
+            }
+            for (let i = 0; i < 5; i++){
+            game();
+            }
+
+
         </script>
     </body>
 </html>
